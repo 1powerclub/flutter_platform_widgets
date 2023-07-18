@@ -5,6 +5,7 @@
  */
 
 import 'dart:ui';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart'
     show
@@ -47,45 +48,47 @@ enum PlatformTarget {
   web,
 }
 
-PlatformStyle _platformStyle(BuildContext context) {
-  final platform = PlatformProvider.of(context)?.platform;
+// PlatformStyle _platformStyle(BuildContext context) {
+//   final platform = PlatformProvider.of(context)?.platform;
 
-  final platformStyle = PlatformProvider.of(context)?.settings.platformStyle;
+//   final platformStyle = PlatformProvider.of(context)?.settings.platformStyle;
 
-  if (platform == null && kIsWeb) {
-    return platformStyle?.web ?? PlatformStyle.Material;
-  }
+//   if (platform == null && kIsWeb) {
+//     return platformStyle?.web ?? PlatformStyle.Material;
+//   }
 
-  switch (platform ?? Theme.of(context).platform) {
-    case TargetPlatform.android:
-      return platformStyle?.android ?? PlatformStyle.Material;
-    case TargetPlatform.fuchsia:
-      return platformStyle?.fuchsia ?? PlatformStyle.Material;
-    case TargetPlatform.iOS:
-      return platformStyle?.ios ?? PlatformStyle.Cupertino;
-    case TargetPlatform.linux:
-      return platformStyle?.linux ?? PlatformStyle.Material;
-    case TargetPlatform.macOS:
-      return platformStyle?.macos ?? PlatformStyle.Cupertino;
-    case TargetPlatform.windows:
-      return platformStyle?.windows ?? PlatformStyle.Material;
-  }
-}
+//   switch (platform ?? Theme.of(context).platform) {
+//     case TargetPlatform.android:
+//       return platformStyle?.android ?? PlatformStyle.Material;
+//     case TargetPlatform.fuchsia:
+//       return platformStyle?.fuchsia ?? PlatformStyle.Material;
+//     case TargetPlatform.iOS:
+//       return platformStyle?.ios ?? PlatformStyle.Cupertino;
+//     case TargetPlatform.linux:
+//       return platformStyle?.linux ?? PlatformStyle.Material;
+//     case TargetPlatform.macOS:
+//       return platformStyle?.macos ?? PlatformStyle.Cupertino;
+//     case TargetPlatform.windows:
+//       return platformStyle?.windows ?? PlatformStyle.Material;
+//   }
+// }
 
-bool isMaterial(BuildContext context) {
-  return _platformStyle(context) == PlatformStyle.Material;
-}
-
-bool isCupertino(BuildContext context) {
-  return _platformStyle(context) == PlatformStyle.Cupertino;
-}
+// bool isMaterial(BuildContext context) {
+//   return _platformStyle(context) == PlatformStyle.Material;
+// }
+//
+// bool isCupertino(BuildContext context) {
+//   return _platformStyle(context) == PlatformStyle.Cupertino;
+// }
+bool isCupertino() => Platform.isIOS || Platform.isMacOS;
+bool isMaterial() => !isCupertino();
 
 T platformThemeData<T>(
   BuildContext context, {
   required T Function(ThemeData theme) material,
   required T Function(CupertinoThemeData theme) cupertino,
 }) {
-  return isMaterial(context)
+  return isMaterial()
       ? material(Theme.of(context))
       : cupertino(CupertinoTheme.of(context));
 }
@@ -167,7 +170,7 @@ Future<T?> showPlatformDialog<T>({
   String? barrierLabel,
   Offset? anchorPoint,
 }) {
-  if (isMaterial(context)) {
+  if (isMaterial()) {
     assert(material?.builder != null || builder != null);
 
     return showDialog<T>(
@@ -266,7 +269,7 @@ Future<T?> showPlatformModalSheet<T>({
   MaterialModalSheetData? material,
   CupertinoModalSheetData? cupertino,
 }) {
-  if (isMaterial(context)) {
+  if (isMaterial()) {
     return showModalBottomSheet<T>(
       context: context,
       builder: builder,

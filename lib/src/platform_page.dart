@@ -105,7 +105,7 @@ Page platformPage({
   PlatformBuilder<MaterialPageData>? material,
   PlatformBuilder<CupertinoPageData>? cupertino,
 }) {
-  if (isMaterial(context)) {
+  if (isMaterial()) {
     final data = material?.call(context, platform(context));
 
     return MaterialPage(

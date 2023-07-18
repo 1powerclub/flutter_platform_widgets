@@ -131,7 +131,7 @@ Future<DateTime?> showPlatformDatePicker({
   PlatformBuilder<CupertinoDatePickerData>? cupertino,
   DatePickerContentBuilder? cupertinoContentBuilder,
 }) async {
-  if (isMaterial(context)) {
+  if (isMaterial()) {
     final data = material?.call(context, platform(context));
     return await showDatePicker(
       context: context,

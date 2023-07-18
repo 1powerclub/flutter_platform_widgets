@@ -27,11 +27,8 @@ class PlatformWidgetExample extends StatelessWidget {
         if (!showBothPlatforms)
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: builder(
-                context,
-                isMaterial(context)
-                    ? TargetPlatform.android
-                    : TargetPlatform.iOS),
+            child: builder(context,
+                isMaterial() ? TargetPlatform.android : TargetPlatform.iOS),
           ),
         Divider(
           height: 16,

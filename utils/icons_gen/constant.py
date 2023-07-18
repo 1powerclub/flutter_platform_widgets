@@ -92,14 +92,14 @@ class _IconCompared extends StatelessWidget {
   _IconCompared(this.title, this.icon);
 
   final String title;
-  final IconData Function(BuildContext context) icon;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
     return PlatformWidgetExample(
       title: title,
       showBothPlatforms: true,
-      builder: (context, platform) => Icon(icon(context)),
+      builder: (_, __) => Icon(icon),
     );
   }
 }

@@ -58,7 +58,7 @@ def append_new_icons_to_file(new_icons, file_path):
             camel_case_name = words[0] + ''.join(word.capitalize() if i > 0 else word for i, word in enumerate(words[1:]))
             camel_case_name = camel_case_name[0].lower() + camel_case_name[1:]  # 将首字母转换为小写
             new_code.append(f'  /// Icons: Icons.{icon} : CupertinoIcons.{icon}\n')
-            new_code.append(f'  IconData get {camel_case_name} => isMaterial(context)\n')
+            new_code.append(f'  IconData get {camel_case_name} => isMaterial()\n')
             new_code.append(f'      ? Icons.{icon}\n')
             new_code.append(f'      : CupertinoIcons.{icon};\n')
             new_code.append('\n')
@@ -84,7 +84,7 @@ def generate_icons_library_file(file_path,icons):
             words = icon.split('_')
             icon_name_camel_case = words[0] + ''.join(word.title() for word in words[1:])
             file.write(f'  /// Icons: Icons.{icon} : CupertinoIcons.{icon}\n')
-            file.write(f'  IconData get {icon_name_camel_case} => isMaterial(context)\n')
+            file.write(f'  IconData get {icon_name_camel_case} => isMaterial()\n')
             file.write(f'      ? Icons.{icon}\n')
             file.write(f'      : CupertinoIcons.{icon};\n')
             file.write('\n')
@@ -98,7 +98,7 @@ def generate_icons_example_page_file(file_path,camel_case_icons):
     with open(file_path, 'w') as file:
         file.write(platform_icons_example_page_header) # Write header of file
         for icon in camel_case_icons:
-            file.write(f' _IconCompared(\'{icon}\', (c) => c.platformIcons.{icon}),\n')
+            file.write(f' _IconCompared(\'{icon}\', PlatformIcons().{icon}),\n')
         file.write(platform_icons_example_page_end) # Write end of file
         
 # Transform the icon name from under_score to camelCase (for example: add_alert -> addAlert)

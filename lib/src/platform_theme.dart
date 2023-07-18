@@ -156,7 +156,7 @@ class _PlatformThemeState extends State<PlatformTheme>
   @override
   Widget build(BuildContext context) {
     if (_matchCupertinoSystemChromeBrightness) {
-      if (isCupertino(context)) {
+      if (isCupertino()) {
         SystemChrome.setSystemUIOverlayStyle(
           isDark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
         );

@@ -11,7 +11,7 @@ import 'package:flutter/widgets.dart';
 import 'platform.dart' show isMaterial;
 
 String formatData(BuildContext context, String data) {
-  if (isMaterial(context)) {
+  if (isMaterial()) {
     return data.toUpperCase();
   }
   return data;

@@ -59,7 +59,7 @@ PageRoute<T> platformPageRoute<T>({
   PlatformBuilder<MaterialPageRouteData>? material,
   PlatformBuilder<CupertinoPageRouteData>? cupertino,
 }) {
-  if (isMaterial(context)) {
+  if (isMaterial()) {
     final data = material?.call(context, platform(context));
 
     return MaterialPageRoute<T>(

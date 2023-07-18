@@ -541,7 +541,7 @@ class PlatformTabController extends ChangeNotifier {
   }
 
   void _init(BuildContext context) {
-    if (isMaterial(context)) {
+    if (isMaterial()) {
       if (_materialController == null) {
         int useIndex = android?.initialIndex ?? _initialIndex;
         if (_cupertinoController != null) {
@@ -556,7 +556,7 @@ class PlatformTabController extends ChangeNotifier {
         )..addListener(_listener);
       }
     }
-    if (isCupertino(context)) {
+    if (isCupertino()) {
       if (_cupertinoController == null) {
         int useIndex = ios?.initialIndex ?? _initialIndex;
         if (_materialController != null) {

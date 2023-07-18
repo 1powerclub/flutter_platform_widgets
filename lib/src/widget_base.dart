@@ -19,9 +19,9 @@ abstract class PlatformWidgetBase<I extends Widget, A extends Widget>
 
   @override
   Widget build(BuildContext context) {
-    if (isMaterial(context)) {
+    if (isMaterial()) {
       return createMaterialWidget(context);
-    } else if (isCupertino(context)) {
+    } else if (isCupertino()) {
       return createCupertinoWidget(context);
     }
 
