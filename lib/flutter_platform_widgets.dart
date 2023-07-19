@@ -45,6 +45,8 @@ export 'src/platform_text.dart';
 export 'src/platform_text_button.dart';
 export 'src/platform_text_field.dart';
 export 'src/platform_text_form_field.dart';
+export 'src/platform_text_selection_toolbar.dart';
+export 'src/platform_text_selection_toolbar_button.dart';
 export 'src/platform_theme.dart';
 export 'src/platform_widget.dart';
 export 'src/platform_widget_builder.dart';
